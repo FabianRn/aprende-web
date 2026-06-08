@@ -1,0 +1,49 @@
+/* ===================================================
+   CSS = el diseño de la página
+   Regla básica:   selector { propiedad: valor; }
+   - selector  = a QUÉ elemento le aplico estilo (ej: body, h1)
+   - propiedad = QUÉ cambio (ej: color, tamaño)
+   - valor     = CÓMO lo cambio (ej: blue, 20px)
+   =================================================== */
+
+/* body = TODA la página. Lo que pongas aquí afecta a todo */
+body {
+  font-family: Arial, sans-serif;   /* tipo de letra */
+  background-color: #349769;        /* color de fondo (gris azulado claro) */
+  color: #cccaca;                   /* color del texto (gris oscuro) */
+  max-width: 700px;                 /* ancho máximo del contenido */
+  margin: 40px auto;                /* centra el contenido en la pantalla */
+  padding: 20px;                    /* espacio interno alrededor del texto */
+  line-height: 1.6;                 /* separación entre líneas (se lee mejor) */
+}
+
+/* h1 = el título principal */
+h1 {
+  color: #ebac25;                   /* azul */
+  text-align: center;               /* centrado */
+  font-size: 48px;                  /* tamaño de letra grande */
+}
+
+/* h2 = los subtítulos */
+h2 {
+  color: #e1dceb;                   /* morado */
+  border-bottom: 2px solid #343335; /* línea morada debajo */
+  padding-bottom: 5px;              /* espacio entre el texto y la línea */
+}
+
+/* li = cada ítem de la lista */
+li {
+  margin-bottom: 8px;               /* separación entre ítems */
+}
+
+/* a = los enlaces */
+a {
+  color: #2563eb;                   /* azul */
+  text-decoration: none;            /* quita el subrayado */
+  font-weight: bold;                /* negrita */
+}
+
+/* a:hover = el enlace CUANDO pasas el mouse por encima */
+a:hover {
+  text-decoration: underline;       /* vuelve a subrayar al pasar el mouse */
+}

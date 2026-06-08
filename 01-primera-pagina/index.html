@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- 👆 Le dice al navegador: "esto es un documento HTML5" -->
+
+<html lang="es">
+<!-- 👆 La raíz de la página. lang="es" indica que el contenido está en español -->
+
+  <head>
+    <!-- 👆 El <head> NO se ve en la página. Contiene información "sobre" la página -->
+
+    <meta charset="UTF-8" />
+    <!-- 👆 Permite usar tildes y ñ correctamente (á, é, í, ó, ú, ñ) -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 👆 Hace que la página se vea bien en celulares (responsive) -->
+
+    <title>Mi primera página</title>
+    <!-- 👆 El texto que aparece en la pestaña del navegador -->
+
+    <link rel="stylesheet" href="styles.css" />
+    <!-- 👆 Conecta este HTML con el archivo de estilos styles.css -->
+  </head>
+
+  <body>
+    <!-- 👇 Todo lo que está dentro de <body> SÍ se ve en la página -->
+
+    <h1>FABIAN REYES👋</h1>
+    <!-- 👆 h1 = título principal (el más grande e importante) -->
+
+    <p>Esta es mi primera página web. La estoy creando para convertirme en desarrollador fullstack.</p>
+    <!-- 👆 p = párrafo (un bloque de texto normal) -->
+
+    <h2>Cosas que voy a aprender:</h2>
+    <!-- 👆 h2 = subtítulo (más pequeño que h1) -->
+
+    <ul>
+      <!-- 👆 ul = lista NO ordenada (con viñetas •) -->
+      <li>HTML — la estructura</li>
+      <li>CSS — el diseño</li>
+      <li>JavaScript — la interactividad</li>
+      <li>Python</li>
+      <!-- 👆 li = cada elemento de la lista (list item) -->
+    </ul>
+
+    <p>Mi sitio favorito es:
+      <a href="https://developer.mozilla.org/es/">MDN Web Docs</a>
+      <!-- 👆 a = enlace (link). href dice a dónde lleva al hacer clic -->
+    </p>
+<p>¡Estoy emocionado por aprender y crear cosas increíbles!</p>
+
+    <!-- 👇 Un botón. El id nos sirve para "agarrarlo" desde JavaScript -->
+    <button id="miBoton">Haz clic aquí</button>
+
+    <!-- 👇 Aquí mostraremos un mensaje. Empieza vacío -->
+    <p id="mensaje"></p>
+
+    <!-- 👇 Conecta el archivo JavaScript. Va al final, antes de cerrar el body -->
+    <script src="script.js"></script>
+  </body>
+</html>

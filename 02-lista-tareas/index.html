@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Lista de Tareas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="contenedor">
+      <h1>📝 TO DO LIST FERN</h1>
+      <p id="contador"></p>
+
+      <!-- Zona para escribir y agregar una tarea -->
+      <div class="zona-agregar">
+        <!-- input = una caja de texto donde el usuario escribe -->
+        <input type="text" id="campoTarea" placeholder="Escribe una tarea..." />
+        <button id="botonAgregar">Agregar</button>
+      </div>
+
+      <!-- ul vacía: aquí JavaScript irá metiendo las tareas como <li> -->
+      <ul id="listaTareas"></ul>
+      <button id="botonBorrarfull">Borrar Todo</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
