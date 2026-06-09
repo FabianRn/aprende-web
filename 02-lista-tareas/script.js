@@ -55,8 +55,6 @@ function dibujar() {
       li.style.textDecoration = "line-through";
     }
     // Si no está completada, contamos cuántas tareas pendientes hay y lo mostramos en el contador
-   
-
 
     // Clic en la tarea = alternar completada (toggle), guardar y redibujar
     li.addEventListener("click", function () {

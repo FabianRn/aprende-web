@@ -1,0 +1,33 @@
+/* Estilos sencillos para nuestra primera app React */
+
+.caja {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.caja h1 {
+  color: #61dafb;   /* el azul típico de React */
+}
+
+.caja button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #61dafb;
+  color: #1e293b;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.caja button:hover {
+  background-color: #4fc3e8;
+}
