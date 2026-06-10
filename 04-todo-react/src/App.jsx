@@ -10,10 +10,21 @@ function App() {
     const guardado = localStorage.getItem('tareas')
     return guardado ? JSON.parse(guardado) : []
   })
+  const [filtro, setFiltro] = useState('todas')  // 'todas', 'pendientes', 'completadas'
 
-  // ESTADO 2: el texto que el usuario está escribiendo en el input.
+    // ESTADO 2: el texto que el usuario está escribiendo en el input.
   // En React, el input se controla con el estado (se llama "input controlado").
   const [texto, setTexto] = useState('')
+  const [prioridad, setPrioridad] = useState('baja') // 'baja', 'media', 'alta'
+  const coloresPrioridad = {
+    baja: 'green',
+    media: 'orange',
+    alta: 'red'
+  }
+  const [editingId, setEditingId] = useState(null)
+  const [editTexto, setEditTexto] = useState('')
+  const [fecha, setFecha] = useState('')
+  
 
   // EFECTO: cada vez que "tareas" cambie, lo guardamos en localStorage.
   // El [tareas] al final significa: "ejecútate cuando 'tareas' cambie".
@@ -26,8 +37,9 @@ function App() {
     if (texto === '') return  // si está vacío, no hacemos nada
 
     // Creamos la tarea nueva. Usamos Date.now() como id único.
-    const nueva = { id: Date.now(), texto: texto, completada: false }
-    console.log(nueva.id, nueva.texto)
+    const nueva = { id: Date.now(), texto: texto, completada: false, prioridad: prioridad, fecha: fecha }
+    console.log(nueva.id, nueva.texto, nueva.prioridad)
+
 
     // ⚠️ IMPORTANTE en React: NO usamos .push().
     // Creamos un array NUEVO con lo de antes (...tareas) + la nueva.
@@ -36,6 +48,20 @@ function App() {
     setTexto('')  // limpiamos el input
   }
 
+  function iniciarEdicion(id) {
+    const tarea = tareas.find((t) => t.id === id)
+    if (!tarea) return
+
+    setEditingId(id)
+    setEditTexto(tarea.texto)
+  }
+
+  function guardarEdicion(id) {
+    setTareas(
+      tareas.map((t) => (t.id === id ? { ...t, texto: editTexto } : t) )
+  )
+    setEditingId(null)
+  }
   // Alternar completada (tachar/destachar) por id
   function alternar(id) {
     // Recorremos el array y devolvemos uno NUEVO con la tarea cambiada
@@ -59,6 +85,12 @@ function App() {
     setTareas(tareas.filter((t) => !t.completada))
   }
 
+  const tareasFiltradas = tareas.filter((t) => {
+    if (filtro === 'pendientes') return !t.completada
+    if (filtro === 'completadas') return t.completada
+    return true  // 'todas'
+  })
+
   return (
     <div className="contenedor">
       <h1>📝  TODO LIST (React)</h1>
@@ -73,29 +105,76 @@ function App() {
           onChange={(e) => setTexto(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') agregarTarea() }}
         />
+        <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+
+        <select value= {prioridad} onChange={(e) => setPrioridad(e.target.value)}>
+          <option value="baja">Baja</option>
+          <option value="media">Media</option>
+          <option value="alta">Alta</option>
+        </select>
+        
         <button onClick={agregarTarea}>Agregar</button>
+      </div>
+        
+
+      <div className="zona-filtros">
+        <button
+          className={filtro === 'todas' ? 'activo' : ''}
+          onClick={() => setFiltro('todas')}
+        >
+          Todas
+        </button>
+        <button
+          className={filtro === 'pendientes' ? 'activo' : ''}
+          onClick={() => setFiltro('pendientes')}
+        >
+          Pendientes
+        </button>
+        <button
+          className={filtro === 'completadas' ? 'activo' : ''}
+          onClick={() => setFiltro('completadas')}
+        >
+          Completadas
+        </button>
       </div>
 
       <ul>
         {/* .map() recorre el array y devuelve un <li> por cada tarea.
             Cada elemento de una lista necesita una "key" única (el id). */}
-        {tareas.map((tarea) => (
-          <li key={tarea.id}>
-            <span
-              onClick={() => alternar(tarea.id)}
-              style={{
-                textDecoration: tarea.completada ? 'line-through' : 'none',
-                cursor: 'pointer',
-              }}
-            >
-              {tarea.texto}
+        {tareasFiltradas.map((tarea) => {
+          
+        
+          const haVencido = tarea.fecha && new Date(tarea.fecha) < new Date() && !tarea.completada;
+          return (
+            <li key={tarea.id}>
+            {tarea.id === editingId ? (
+        
+        <div className="zona-edicion">
+          <input 
+          value={editTexto} onChange={(e) => setEditTexto(e.target.value)}/>
 
-            </span>
-            <button className="btn-borrar" onClick={() => borrar(tarea.id)}>
-              🗑️
-            </button>
+          <button onClick={() => guardarEdicion(tarea.id)}>Guardar</button>
+        </div>
+      ) : (
+      <div className="item-tarea">
+      <span
+        onClick={() => alternar(tarea.id)}
+        style={{ textDecoration: tarea.completada ? 'line-through' : 'none', color: coloresPrioridad[tarea.prioridad] }}
+    >
+      {tarea.texto}
+    </span>
+    <small style={{color: haVencido ? 'red' : 'gray'}}> Vence: {tarea.fecha}</small>
+
+    <div className="acciones">
+      <button onClick={() => iniciarEdicion(tarea.id)}>✏️</button>
+      <button className="btn-borrar" onClick={() => borrar(tarea.id)}>🗑️</button>
+    </div>
+  </div>
+)
+      }
           </li>
-        ))}
+          );
+        })}
       </ul>
       <button onClick={borrarCompletadas}>
         🗑️ Borrar completadas
