@@ -146,7 +146,7 @@ function App() {
         
           const haVencido = tarea.fecha && new Date(tarea.fecha) < new Date() && !tarea.completada;
           return (
-            <li key={tarea.id}>
+          <li key={tarea.id}>
             {tarea.id === editingId ? (
         
         <div className="zona-edicion">
